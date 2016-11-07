@@ -175,14 +175,14 @@ class WP {
 			$error = '404';
 			$this->did_permalink = true;
 
-			$pathinfo = isset( $_SERVER['PATH_INFO'] ) ? $_SERVER['PATH_INFO'] : '';
-			list( $pathinfo ) = explode( '?', $pathinfo );
-			$pathinfo = str_replace( "%", "%25", $pathinfo );
+   $pathinfo = isset( $_SERVER['PATH_INFO'] ) ? iconv('Big5', 'UTF-8', $_SERVER['PATH_INFO']) : '';
+    list( $pathinfo ) = explode( '?', $pathinfo );
+    $pathinfo = str_replace( "%", "%25", $pathinfo );
 
-			list( $req_uri ) = explode( '?', $_SERVER['REQUEST_URI'] );
-			$self = $_SERVER['PHP_SELF'];
-			$home_path = trim( parse_url( home_url(), PHP_URL_PATH ), '/' );
-			$home_path_regex = sprintf( '|^%s|i', preg_quote( $home_path, '|' ) );
+    list( $req_uri ) = explode( '?', iconv('Big5', 'UTF-8', $_SERVER['REQUEST_URI']) );
+    $self = $_SERVER['PHP_SELF'];
+    $home_path = trim( parse_url( home_url(), PHP_URL_PATH ), '/' );
+    $home_path_regex = sprintf( '|^%s|i', preg_quote( $home_path, '|' ) );
 
 			// Trim path info from the end and the leading home path from the
 			// front. For path info requests, this leaves us with the requesting
